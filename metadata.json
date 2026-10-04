@@ -1,0 +1,6 @@
+{
+  "name": "QuoteForge Local",
+  "description": "Professional Service Quote & Proposal Generator Mini SaaS for local trade contractors and service businesses.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

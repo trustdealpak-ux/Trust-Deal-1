@@ -1,0 +1,92 @@
+{
+  "entities": {
+    "Quote": {
+      "title": "Quote",
+      "description": "A contractor trade proposal and service quote",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "quoteNumber": { "type": "string" },
+        "businessId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "validUntil": { "type": "string" },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "sent", "viewed", "accepted", "declined", "invoiced"]
+        },
+        "projectTitle": { "type": "string" },
+        "projectScopeSummary": { "type": "string" },
+        "isTiered": { "type": "boolean" },
+        "discountType": { "type": "string" },
+        "discountValue": { "type": "number" },
+        "depositRequiredPercent": { "type": "number" },
+        "termsAndConditions": { "type": "string" },
+        "warrantyTerms": { "type": "string" }
+      },
+      "required": ["id", "quoteNumber", "businessId", "createdAt", "status", "projectTitle"]
+    },
+    "Business": {
+      "title": "Business",
+      "description": "Contractor business profile and company identity",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "trade": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "currencySymbol": { "type": "string" },
+        "defaultTaxRate": { "type": "number" },
+        "defaultDepositPercent": { "type": "number" }
+      },
+      "required": ["id", "name", "trade", "phone", "email"]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Customer contact and property address record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "businessId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "serviceAddress": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "businessId", "name", "email", "serviceAddress"]
+    },
+    "Template": {
+      "title": "Template",
+      "description": "Service catalog line item pricebook template",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "trade": { "type": "string" },
+        "title": { "type": "string" },
+        "category": { "type": "string" },
+        "defaultPrice": { "type": "number" },
+        "defaultCost": { "type": "number" }
+      },
+      "required": ["id", "trade", "title", "category", "defaultPrice"]
+    }
+  },
+  "firestore": {
+    "/quotes/{quoteId}": {
+      "schema": { "$ref": "#/entities/Quote" },
+      "description": "Trade service proposals and client quotes"
+    },
+    "/businesses/{businessId}": {
+      "schema": { "$ref": "#/entities/Business" },
+      "description": "Contractor business workspaces and branding"
+    },
+    "/clients/{clientId}": {
+      "schema": { "$ref": "#/entities/Client" },
+      "description": "Customer contact and client directory"
+    },
+    "/templates/{templateId}": {
+      "schema": { "$ref": "#/entities/Template" },
+      "description": "Standard service catalog items"
+    }
+  }
+}
